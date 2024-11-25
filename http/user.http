@@ -1,0 +1,11 @@
+### 회원가입
+POST http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "username": "test5",
+    "email": "test5@test.com"
+}
+
+### 모든 유저
+GET http://localhost:8000/users
