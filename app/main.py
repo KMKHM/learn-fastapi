@@ -12,8 +12,8 @@ async def lifespan(app: FastAPI):
     logging.info('"DB connected"')
     await create_user_table(db_pool)
     logging.info('"User table created"')
-    yield  # 애플리케이션 동작
-
+    yield  
+    
     # 앱 종료 시 실행
     logging.info("Shutting down application...")
     await disconnect_from_db(db_pool)
