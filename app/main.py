@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from contextlib import asynccontextmanager
 from config.db_config import connect_to_db, disconnect_from_db, create_user_table
 from config.log_config import logging
@@ -13,7 +13,7 @@ async def lifespan(app: FastAPI):
     await create_user_table(db_pool)
     logging.info('"User table created"')
     yield  
-    
+
     # 앱 종료 시 실행
     logging.info("Shutting down application...")
     await disconnect_from_db(db_pool)
@@ -21,3 +21,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(user_router)
+
+
+def get_service(id: int):
+    return "service layer" + str(id)
+
+@app.get("/service/{id}")
+async def controller(service_result = Depends(get_service)):
+    return service_result + "->" + "Controller layer"

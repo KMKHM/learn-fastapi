@@ -1,17 +1,20 @@
+### 서비스 확인
+GET http://localhost:8000/service/12
+
 ### 회원가입
 POST http://localhost:8000/users
 Content-Type: application/json
 
 {
-    "username": "test5",
-    "email": "test5@test.com"
+    "username": "test571",
+    "email": "test571@test.com"
 }
 
 ### 모든 유저
 GET http://localhost:8000/users
 
 ### 유저 조회
-GET http://localhost:8000/users/2
+GET http://localhost:8000/users/1
 
 ### 유저 삭제
 DELETE http://localhost:8000/users/1

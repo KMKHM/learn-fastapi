@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Request
-from app import user_service
-from app.user_service import User
+from fastapi import APIRouter, Request, Depends
+from app.service import user_service
+from app.service.user_service import User
 router = APIRouter()
 
 @router.get("/")
@@ -8,8 +8,7 @@ async def root():
     return "hello"
 
 @router.post("/users")
-async def sign_up(user: User, request: Request):
-    result = await user_service.create_user(request, user)
+async def sign_up(user: User, result = Depends(user_service.create_user)):
     return {"message": "User created successfully", "user": result}
 
 @router.get("/users")
