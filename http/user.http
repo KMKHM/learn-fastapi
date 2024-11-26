@@ -9,3 +9,9 @@ Content-Type: application/json
 
 ### 모든 유저
 GET http://localhost:8000/users
+
+### 유저 조회
+GET http://localhost:8000/users/1
+
+### 유저 삭제
+DELETE http://localhost:8000/users/1

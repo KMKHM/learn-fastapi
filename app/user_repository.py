@@ -10,3 +10,15 @@ async def select_all_users(pool):
         return await conn.fetch("""
                 SELECT * FROM users
                 """)
+    
+async def select_user_by_id(pool, id: int):
+    async with pool.acquire() as conn:
+        return await conn.fetchrow("""
+                SELECT * FROM users WHERE id = $1
+                """, id)
+
+async def delete_user_by_id(pool, id: int):
+    async with pool.acquire() as conn:
+        await conn.execute("""
+                DELETE FROM users WHERE id = $1
+                """, id)
