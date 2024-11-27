@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Depends
 from contextlib import asynccontextmanager
-from config.db_config import connect_to_db, disconnect_from_db, create_user_table
+from config.db_config import connect_to_db, disconnect_from_db, create_user_table, create_point_table
 from config.log_config import logging
 from app.user_router import router as user_router
+from app.point_router import router as point_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -12,6 +13,8 @@ async def lifespan(app: FastAPI):
     logging.info('"DB connected"')
     await create_user_table(db_pool)
     logging.info('"User table created"')
+    await create_point_table(db_pool)
+    logging.info('"Point table created"')
     yield  
 
     # 앱 종료 시 실행
@@ -21,7 +24,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(user_router)
-
+app.include_router(point_router)
 
 def get_service(id: int):
     return "service layer" + str(id)

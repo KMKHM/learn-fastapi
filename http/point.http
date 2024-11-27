@@ -1,0 +1,7 @@
+### 포인트 생성
+POST http://localhost:8000/points/1
+Content-Type: application/json
+
+{
+    "amount": 0
+}
