@@ -32,6 +32,6 @@ async def remove_user_by_id(request: Request, id: int):
     return await user_repository.delete_user_by_id(pool, id)
 
 @transactional
-async def update_user_by_id(request: Request, id: int, user: User):
-    pool = request.app.state.db_pool
-    return await user_repository.update_user_by_id(pool, id, user.username, user.email)
+async def update_user_by_id(pool= Depends(get_db_pool), *, id: int, user: User):
+    await user_repository.update_user_by_id(pool, id, user.username, user.email)
+    return user

@@ -24,6 +24,6 @@ PUT http://localhost:8000/users/2
 Content-Type: application/json
 
 {
-    "username": "test6",
-    "email": "test6@test.com"
+    "username": "test7",
+    "email": "test7@test.com"
 }

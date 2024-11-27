@@ -2,7 +2,9 @@
 async def insert_user(pool, username: str, email: str):
     async with pool.acquire() as conn:
         await conn.execute("""
-            INSERT INTO users (username, email) VALUES ($1, $2)
+            INSERT INTO users (username, email) 
+            VALUES ($1, $2)
+            RETURNING *
              """, username, email)
 
 async def select_all_users(pool):
@@ -26,5 +28,7 @@ async def delete_user_by_id(pool, id: int):
 async def update_user_by_id(pool, id: int, username: str, email: str):
     async with pool.acquire() as conn:
         await conn.execute("""
-                UPDATE users SET username = $2, email = $3 WHERE id = $1
+                UPDATE users 
+                    SET username = $2, email = $3, modified_at = CURRENT_TIMESTAMP
+                    WHERE id = $1
                 """, id, username, email)

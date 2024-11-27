@@ -27,6 +27,5 @@ async def delete_user(request: Request, id: int):
     return {"message": "User deleted successfully"}
 
 @router.put("/users/{id}")
-async def update_user(request: Request, id: int, user: User):
-    await user_service.update_user_by_id(request, id, user)
-    return {"message": "User updated successfully"}
+async def update_user(result=Depends(user_service.update_user_by_id)):
+    return {"message": "User updated successfully", "user": result}

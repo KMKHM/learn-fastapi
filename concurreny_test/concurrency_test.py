@@ -34,7 +34,7 @@ async def update_balance(pool, delta, delay=0):
         async with conn.transaction():
             # 계좌 정보 읽기
             account = await conn.fetchrow("SELECT id, balance FROM accounts WHERE id = 1;")
-            # account = await conn.fetchrow("SELECT id, balance FROM accounts WHERE id = 1 FOR UPDATE;") 비관적 락
+            # account = await conn.fetchrow("SELECT id, balance FROM accounts WHERE id = 1 FOR UPDATE;") #비관적 락
             current_balance = account['balance']
             print(f"Current balance: {current_balance}")
 
