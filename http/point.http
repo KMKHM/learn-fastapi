@@ -3,5 +3,13 @@ POST http://localhost:8000/points/1
 Content-Type: application/json
 
 {
-    "amount": 0
+    "amount": 8900
+}
+
+### 포인트 사용
+POST http://localhost:8000/points/use/1
+Content-Type: application/json
+
+{
+    "amount": 800000
 }
